@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-const config = useRuntimeConfig()
 
 export const useCommentStore = defineStore('comment', {
    state: () => ({
@@ -23,6 +22,7 @@ export const useCommentStore = defineStore('comment', {
       async addComment() {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/comment/${this.showComment}`, {
                method: "POST",
                credentials: "include",
@@ -43,6 +43,7 @@ export const useCommentStore = defineStore('comment', {
       async commentList(taskId) {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             if(!this.showComment) return
             const res = await $fetch(`${config.public.apiUrl}/api/task/${taskId}`, {
                credentials: "include",
@@ -64,6 +65,7 @@ export const useCommentStore = defineStore('comment', {
       async deleteComment() {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             await $fetch(`${config.public.apiUrl}/api/comment/${this.upComId}`, {
                method: 'DELETE',
                credentials: "include",
@@ -97,6 +99,7 @@ export const useCommentStore = defineStore('comment', {
       async updateComment() {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/comment/${this.commentId}`, {
                method: 'PATCH',
                credentials: "include",

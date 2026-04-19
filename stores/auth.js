@@ -1,6 +1,5 @@
 import { defineStore } from "pinia"
 import { navigateTo, useCookie } from '#app'
-const config = useRuntimeConfig()
 
 export const useAuthStore = defineStore('auth', {
    state: () => ({
@@ -23,6 +22,7 @@ export const useAuthStore = defineStore('auth', {
    actions: {
       async login(form) {
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/users/login`, {
                method: 'POST',
                credentials: 'include',
@@ -53,6 +53,7 @@ export const useAuthStore = defineStore('auth', {
 
       async logout() {
          try {
+            const config = useRuntimeConfig()
             await $fetch(`${config.public.apiUrl}/api/users/logout`, {
                method: "POST",
                credentials: "include",
@@ -70,6 +71,7 @@ export const useAuthStore = defineStore('auth', {
 
       async signup() {
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/users/signup`, {
                method: "POST",
                body: this.form,
@@ -100,6 +102,7 @@ export const useAuthStore = defineStore('auth', {
 
       async verifyEmail(token) {
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/users/verifyEmail/${token}`, {
                method: "GET",
                credentials: "include",

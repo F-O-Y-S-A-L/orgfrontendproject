@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-const config = useRuntimeConfig()
+
 
 export const useNotificationStore = defineStore('notification', {
    state: () => ({
@@ -12,6 +12,7 @@ export const useNotificationStore = defineStore('notification', {
       },
       async userOnlyNotification() {
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/notification/user`, {
                credentials: 'include',
             })
@@ -22,6 +23,7 @@ export const useNotificationStore = defineStore('notification', {
       },
       async userNotifiDelete(notifiId) {
          try {
+            const config = useRuntimeConfig()
              await $fetch(`${config.public.apiUrl}/api/notification/${notifiId}`, {
                method: 'DELETE',
                credentials: 'include'
@@ -33,6 +35,7 @@ export const useNotificationStore = defineStore('notification', {
       },
       async unreadNotifiCount() {
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/notification/unread-count`, {
                credentials: 'include',
             })
@@ -43,6 +46,7 @@ export const useNotificationStore = defineStore('notification', {
       },
       async markAsRead() {
          try {
+            const config = useRuntimeConfig()
             await $fetch(`${config.public.apiUrl}/api/notification/mark-as-read`, {
                credentials: 'include'
             })

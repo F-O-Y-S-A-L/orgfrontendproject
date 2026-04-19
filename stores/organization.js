@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-const config = useRuntimeConfig()
+
 
 export const organizationStore = defineStore('organization', {
    state: () => ({
@@ -31,6 +31,7 @@ export const organizationStore = defineStore('organization', {
       async createOrganization() {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/org`, {
                method: "POST",
                headers: { "Content-Type": "application/json" },
@@ -54,6 +55,7 @@ export const organizationStore = defineStore('organization', {
       async allOrgCard() {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/org`, {
                credentials: "include",
             });
@@ -82,6 +84,7 @@ export const organizationStore = defineStore('organization', {
       async sendInvite() {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/org/${this.currentOrgId}/invite`, {
                method: "POST",
                body: { email: this.inviteEmail, role: this.inviteRole },
@@ -113,6 +116,7 @@ export const organizationStore = defineStore('organization', {
       async deleteOrg(id) {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/org/${id}`, {
                method: "DELETE",
                credentials: "include",
@@ -140,6 +144,7 @@ export const organizationStore = defineStore('organization', {
       async updateOrg() {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             await $fetch(`${config.public.apiUrl}/api/org/${this.currentOrgId}`, {
                method: "PATCH",
                credentials: "include",
@@ -173,6 +178,7 @@ export const organizationStore = defineStore('organization', {
          this.showOrgDetils = false
       },
       async orgDetails(orgIds) {
+         const config = useRuntimeConfig()
          const res = await $fetch(`${config.public.apiUrl}/api/org/${orgIds}`, {
             credentials: 'include'
          })
@@ -180,6 +186,7 @@ export const organizationStore = defineStore('organization', {
       },
       async userOrg() {
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/org/getUserOrg`, {
                method: 'get',
                credentials: 'include'

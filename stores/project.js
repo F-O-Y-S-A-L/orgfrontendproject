@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-const config = useRuntimeConfig()
 
 export const useProjectStore = defineStore('project', {
    state: () => ({
@@ -31,6 +30,7 @@ export const useProjectStore = defineStore('project', {
                alert("Project name is required");
                return;
             }
+            const config = useRuntimeConfig()
             let res = await $fetch(`${config.public.apiUrl}/api/project/${orgId}`, {
                method: "POST",
                body: {
@@ -58,6 +58,7 @@ export const useProjectStore = defineStore('project', {
       async projectList(orgId) {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/project/${orgId}/project`, {
                credentials: 'include'
             })
@@ -71,6 +72,7 @@ export const useProjectStore = defineStore('project', {
       async deleteProject(id, orgId) {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/project/${id}`, {
                method: 'DELETE',
                body: { orgId },
@@ -106,6 +108,7 @@ export const useProjectStore = defineStore('project', {
       async updateProject() {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/project/${this.currentProId}`, {
                method: 'PATCH',
                credentials: 'include',
@@ -133,6 +136,7 @@ export const useProjectStore = defineStore('project', {
       async Allproject() {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/project`, {
                credentials: 'include'
             })
@@ -145,6 +149,7 @@ export const useProjectStore = defineStore('project', {
       },
       async userByPorject() {
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/project/userByProject`,{
                credentials: 'include'
             })

@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-const config = useRuntimeConfig()
 
 export const useTaskStore = defineStore('task', {
    state: () => ({
@@ -24,6 +23,7 @@ export const useTaskStore = defineStore('task', {
                }, 3000);
                return;
             }
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/task/${projectId}`, {
                method: "POST",
                headers: { "Content-Type": "application/json" },
@@ -55,6 +55,7 @@ export const useTaskStore = defineStore('task', {
       async taskList(projectId) {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/task/${projectId}/task`, {
                credentials: "include",
             });
@@ -68,6 +69,7 @@ export const useTaskStore = defineStore('task', {
       async deleteTask(taskId) {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/task/${taskId}`, {
                method: 'DELETE',
                credentials: "include",
@@ -107,6 +109,7 @@ export const useTaskStore = defineStore('task', {
       async saveUpdate() {
          this.isLoading = true
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/task/${this.currentTaskId}`, {
                method: 'PATCH',
                credentials: 'include',

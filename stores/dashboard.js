@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-const config = useRuntimeConfig()
 
 export const useDashboardStore = defineStore('user', {
    state: () => ({
@@ -17,7 +16,8 @@ export const useDashboardStore = defineStore('user', {
 
       async getData() {
          try {
-            const res = await $fetch("https://api-org.onrender.com/api/users/me", {
+            const config = useRuntimeConfig()
+            const res = await $fetch(`${config.public.apiUrl}/api/users/me`, {
                credentials: "include",
             });
             this.userData = res.data.User;
@@ -36,6 +36,7 @@ export const useDashboardStore = defineStore('user', {
          formData.append('email', this.userData.email)
          formData.append('photo', this.userData.photo)
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/users/updateMe`, {
                method: 'PATCH',
                credentials: 'include',

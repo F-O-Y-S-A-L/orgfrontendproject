@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { navigateTo } from '#app'
-const config = useRuntimeConfig()
+
 
 export const userForgotPass = defineStore('forgotPass', {
    state: () => ({
@@ -23,6 +23,7 @@ export const userForgotPass = defineStore('forgotPass', {
       },
       async forgotPassword() {
          try {
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/users/forgotPassword`, {
                method: 'POST',
                credentials: 'include',
@@ -60,6 +61,7 @@ export const userForgotPass = defineStore('forgotPass', {
                }, 2000);
                return;
             }
+            const config = useRuntimeConfig()
             const res = await $fetch(`${config.public.apiUrl}/api/users/resetPassword/${token}`, {
                method: 'PATCH',
                headers: { "Content-Type": "application/json" },
