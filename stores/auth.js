@@ -72,6 +72,7 @@ export const useAuthStore = defineStore('auth', {
       async signup() {
          try {
             const config = useRuntimeConfig()
+            console.log("Signup URL:", `${baseUrl}/api/users/signup`) 
             const baseUrl = config.public.apiUrl.replace(/\/$/, "")
             const res = await $fetch(`${baseUrl}/api/users/signup`, {
                method: "POST",
