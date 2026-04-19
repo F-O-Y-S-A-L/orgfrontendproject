@@ -20,7 +20,7 @@ export const useActivityLogStore = defineStore('ActivityLog', {
          } catch (error) {
             console.log("Error:", error);
          } finally {
-            this.isLoading = false;
+            this.isLoading = false
          }
       },
 
