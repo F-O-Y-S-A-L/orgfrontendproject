@@ -30,12 +30,13 @@
     class="w-full border outline-none rounded-lg p-3 focus:ring focus:ring-blue-300"
   />
   <div class="relative w-full">
-    <input
-      v-model="authStore.form.password"
-      :type="authStore.showPassword ? 'text' : 'password'"
-      placeholder="Password"
-      class="w-full outline-none border rounded-lg p-3 focus:ring focus:ring-blue-300"
-    />
+<input
+  v-model="authStore.form.password"
+  :type="authStore.showPassword ? 'text' : 'password'"
+  placeholder="Password"
+  autocomplete="current-password"
+  class="w-full outline-none border rounded-lg p-3 focus:ring focus:ring-blue-300"
+/>
     <button
       type="button"
       @click="authStore.togglePassword()"
