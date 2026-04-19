@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt"],
   runtimeConfig: {
     public: {
-      apiUrl: process.env.API_URL,
+      apiUrl: process.env.API_URI,
       socketUrl: process.env.SOCKET_URL
     }
   }
