@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+const config = useRuntimeConfig()
 
 export const useTaskStore = defineStore('task', {
    state: () => ({
@@ -23,7 +24,7 @@ export const useTaskStore = defineStore('task', {
                }, 3000);
                return;
             }
-            const res = await $fetch(`${process.env.API_URI}/api/task/${projectId}`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/task/${projectId}`, {
                method: "POST",
                headers: { "Content-Type": "application/json" },
                body: {
@@ -54,7 +55,7 @@ export const useTaskStore = defineStore('task', {
       async taskList(projectId) {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/task/${projectId}/task`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/task/${projectId}/task`, {
                credentials: "include",
             });
             this.newTasks = res.data.task || [];
@@ -67,7 +68,7 @@ export const useTaskStore = defineStore('task', {
       async deleteTask(taskId) {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/task/${taskId}`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/task/${taskId}`, {
                method: 'DELETE',
                credentials: "include",
             })
@@ -106,7 +107,7 @@ export const useTaskStore = defineStore('task', {
       async saveUpdate() {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/task/${this.currentTaskId}`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/task/${this.currentTaskId}`, {
                method: 'PATCH',
                credentials: 'include',
                body: { title: this.taskUpdates.title, description: this.taskUpdates.description, status: this.taskUpdates.status, dueDate: this.taskUpdates.dueDate }

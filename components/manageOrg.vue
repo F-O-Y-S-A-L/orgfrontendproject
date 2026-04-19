@@ -148,7 +148,7 @@
             </p>
           </div>
           <img
-            :src="`${process.env.API_URI}/img/user/${userStore.selectedOrg.org.ownerId.photo}`"
+            :src="`${config.public.apiUrl}/img/user/${userStore.selectedOrg.org.ownerId.photo}`"
             class="h-28 w-28 sm:h-36 sm:w-36 md:h-44 md:w-44 rounded-xl object-cover"
             alt=""
           />

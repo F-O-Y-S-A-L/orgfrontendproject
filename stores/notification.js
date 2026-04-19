@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+const config = useRuntimeConfig()
 
 export const useNotificationStore = defineStore('notification', {
    state: () => ({
@@ -11,7 +12,7 @@ export const useNotificationStore = defineStore('notification', {
       },
       async userOnlyNotification() {
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/notification/user`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/notification/user`, {
                credentials: 'include',
             })
             this.userNotifications = (res.data.notification).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -21,7 +22,7 @@ export const useNotificationStore = defineStore('notification', {
       },
       async userNotifiDelete(notifiId) {
          try {
-             await $fetch(`${process.env.API_URI}/api/notification/${notifiId}`, {
+             await $fetch(`${config.public.apiUrl}/api/notification/${notifiId}`, {
                method: 'DELETE',
                credentials: 'include'
             })
@@ -32,7 +33,7 @@ export const useNotificationStore = defineStore('notification', {
       },
       async unreadNotifiCount() {
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/notification/unread-count`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/notification/unread-count`, {
                credentials: 'include',
             })
             this.unreadCounts = res.count
@@ -42,7 +43,7 @@ export const useNotificationStore = defineStore('notification', {
       },
       async markAsRead() {
          try {
-            await $fetch(`${process.env.API_URI}/api/notification/mark-as-read`, {
+            await $fetch(`${config.public.apiUrl}/api/notification/mark-as-read`, {
                credentials: 'include'
             })
          } catch (error) {

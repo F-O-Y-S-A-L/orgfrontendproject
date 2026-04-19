@@ -84,7 +84,7 @@
             class="mt-1 text-base text-gray-500 flex items-center gap-2"
           >
             <img
-              :src="`${process.env.API_URI}/img/user/${project.createdBy?.photo}`"
+              :src="`${config.public.apiUrl}/img/user/${project.createdBy?.photo}`"
               alt=""
               class="w-8 h-8 md:w-9 md:h-9 rounded-full"
             />
@@ -159,6 +159,7 @@
 import { useRoute } from "vue-router";
 import { useProjectStore } from "@/stores/project";
 import { useDashboardStore } from "@/stores/dashboard";
+const config = useRuntimeConfig()
 const route = useRoute();
 const orgId = route.params.id;
 const projectStore = useProjectStore();

@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+const config = useRuntimeConfig()
 
 export const useProjectStore = defineStore('project', {
    state: () => ({
@@ -30,7 +31,7 @@ export const useProjectStore = defineStore('project', {
                alert("Project name is required");
                return;
             }
-            let res = await $fetch(`${process.env.API_URI}/api/project/${orgId}`, {
+            let res = await $fetch(`${config.public.apiUrl}/api/project/${orgId}`, {
                method: "POST",
                body: {
                   name: this.project.newProjectName,
@@ -57,7 +58,7 @@ export const useProjectStore = defineStore('project', {
       async projectList(orgId) {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/project/${orgId}/project`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/project/${orgId}/project`, {
                credentials: 'include'
             })
             this.projects = res.data.projects || []
@@ -70,7 +71,7 @@ export const useProjectStore = defineStore('project', {
       async deleteProject(id, orgId) {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/project/${id}`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/project/${id}`, {
                method: 'DELETE',
                body: { orgId },
                credentials: 'include'
@@ -105,7 +106,7 @@ export const useProjectStore = defineStore('project', {
       async updateProject() {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/project/${this.currentProId}`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/project/${this.currentProId}`, {
                method: 'PATCH',
                credentials: 'include',
                body: { name: this.projectName, description: this.projectDes }
@@ -132,7 +133,7 @@ export const useProjectStore = defineStore('project', {
       async Allproject() {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/project`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/project`, {
                credentials: 'include'
             })
             this.projectCounts = res.data.projectCount
@@ -144,7 +145,7 @@ export const useProjectStore = defineStore('project', {
       },
       async userByPorject() {
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/project/userByProject`,{
+            const res = await $fetch(`${config.public.apiUrl}/api/project/userByProject`,{
                credentials: 'include'
             })
             this.projects = res.data.projects

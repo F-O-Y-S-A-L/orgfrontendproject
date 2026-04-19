@@ -55,7 +55,7 @@
         <!-- Owner Info -->
         <div class="flex items-center gap-3 px-6 py-4">
           <img
-            :src="`${process.env.API_URI}/img/user/${org.ownerId?.photo}`"
+            :src="`${config.public.apiUrl}/img/user/${org.ownerId?.photo}`"
             class="w-12 h-12 rounded-full border-2 border-indigo-500"
           />
           <div>
@@ -174,6 +174,7 @@
 import { onMounted, ref } from "vue";
 import { organizationStore } from "@/stores/organization";
 import { useNotificationStore } from "@/stores/notification";
+const config = useRuntimeConfig()
 const notifiStore = useNotificationStore();
 const orgStore = organizationStore();
 onMounted(async () => {

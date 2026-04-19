@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+const config = useRuntimeConfig()
 
 export const useUserStore = defineStore('User', {
    state: () => ({
@@ -35,7 +36,7 @@ export const useUserStore = defineStore('User', {
    actions: {
       async getAllUsers() {
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/admin`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/admin`, {
                credentials: 'include'
             })
             this.allUsers = res.data.user.allUser
@@ -47,7 +48,7 @@ export const useUserStore = defineStore('User', {
       async allOrgCard() {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/org`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/org`, {
                credentials: "include",
             });
             this.organization = res.data.org.allOrg || [];
@@ -66,7 +67,7 @@ export const useUserStore = defineStore('User', {
       },
       async updateOrg() {
          try {
-            await $fetch(`${process.env.API_URI}/api/org/${this.currentOrgId}/invite`, {
+            await $fetch(`${config.public.apiUrl}/api/org/${this.currentOrgId}/invite`, {
                method: 'POST',
                credentials: 'include',
                body: { email: this.sendEmail, role: this.sendRole }
@@ -85,7 +86,7 @@ export const useUserStore = defineStore('User', {
       },
       async deleteOrg() {
          try {
-            await $fetch(`${process.env.API_URI}/api/admin/org/${this.currentOrgId}`, {
+            await $fetch(`${config.public.apiUrl}/api/admin/org/${this.currentOrgId}`, {
                method: 'DELETE',
                credentials: 'include',
             })
@@ -110,7 +111,7 @@ export const useUserStore = defineStore('User', {
       },
       async deleteUser() {
          try {
-            await $fetch(`${process.env.API_URI}/api/admin/user/${this.currentUserId}`, {
+            await $fetch(`${config.public.apiUrl}/api/admin/user/${this.currentUserId}`, {
                method: 'DELETE',
                credentials: 'include',
             })
@@ -135,7 +136,7 @@ export const useUserStore = defineStore('User', {
       },
       async userInfo(userId) {
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/admin/${userId}`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/admin/${userId}`, {
                credentials: "include",
             });
             this.userData = res.data?.User;
@@ -151,14 +152,14 @@ export const useUserStore = defineStore('User', {
          this.showOrgDetils = false
       },
       async orgDetails(orgIds) {
-         const res = await $fetch(`${process.env.API_URI}/api/org/${orgIds}`, {
+         const res = await $fetch(`${config.public.apiUrl}/api/org/${orgIds}`, {
             credentials: 'include'
          })
          this.selectedOrg = res.data.OrgUser
       },
       async userOrg() {
          try {
-            const res = await $fetch('${process.env.API_URI}/api/org/getUserOrg', {
+            const res = await $fetch('${config.public.apiUrl}/api/org/getUserOrg', {
                method: 'get',
                credentials: 'include'
             })
@@ -171,7 +172,7 @@ export const useUserStore = defineStore('User', {
       async sendInvite() {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/org/${this.currentOrgId}/invite`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/org/${this.currentOrgId}/invite`, {
                method: "POST",
                body: { email: this.inviteEmail, role: this.inviteRole },
                credentials: "include",

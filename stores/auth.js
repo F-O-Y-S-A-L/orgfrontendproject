@@ -1,5 +1,6 @@
 import { defineStore } from "pinia"
 import { navigateTo, useCookie } from '#app'
+const config = useRuntimeConfig()
 
 export const useAuthStore = defineStore('auth', {
    state: () => ({
@@ -22,7 +23,7 @@ export const useAuthStore = defineStore('auth', {
    actions: {
       async login(form) {
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/users/login`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/users/login`, {
                method: 'POST',
                credentials: 'include',
                body: { email: form.email, password: form.password }
@@ -52,7 +53,7 @@ export const useAuthStore = defineStore('auth', {
 
       async logout() {
          try {
-            await $fetch(`${process.env.API_URI}/api/users/logout`, {
+            await $fetch(`${config.public.apiUrl}/api/users/logout`, {
                method: "POST",
                credentials: "include",
             })
@@ -69,7 +70,7 @@ export const useAuthStore = defineStore('auth', {
 
       async signup() {
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/users/signup`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/users/signup`, {
                method: "POST",
                body: this.form,
                credentials: 'include'
@@ -99,7 +100,7 @@ export const useAuthStore = defineStore('auth', {
 
       async verifyEmail(token) {
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/users/verifyEmail/${token}`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/users/verifyEmail/${token}`, {
                method: "GET",
                credentials: "include",
             })

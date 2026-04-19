@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+const config = useRuntimeConfig()
 
 export const organizationStore = defineStore('organization', {
    state: () => ({
@@ -30,7 +31,7 @@ export const organizationStore = defineStore('organization', {
       async createOrganization() {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/org`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/org`, {
                method: "POST",
                headers: { "Content-Type": "application/json" },
                body: { name: this.orgName },
@@ -53,7 +54,7 @@ export const organizationStore = defineStore('organization', {
       async allOrgCard() {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/org`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/org`, {
                credentials: "include",
             });
             this.organization = res.data.org.allOrg || [];
@@ -81,7 +82,7 @@ export const organizationStore = defineStore('organization', {
       async sendInvite() {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/org/${this.currentOrgId}/invite`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/org/${this.currentOrgId}/invite`, {
                method: "POST",
                body: { email: this.inviteEmail, role: this.inviteRole },
                credentials: "include",
@@ -112,7 +113,7 @@ export const organizationStore = defineStore('organization', {
       async deleteOrg(id) {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/org/${id}`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/org/${id}`, {
                method: "DELETE",
                credentials: "include",
             });
@@ -139,7 +140,7 @@ export const organizationStore = defineStore('organization', {
       async updateOrg() {
          this.isLoading = true
          try {
-            await $fetch(`${process.env.API_URI}/api/org/${this.currentOrgId}`, {
+            await $fetch(`${config.public.apiUrl}/api/org/${this.currentOrgId}`, {
                method: "PATCH",
                credentials: "include",
                body: { name: this.updateOrgName }
@@ -172,14 +173,14 @@ export const organizationStore = defineStore('organization', {
          this.showOrgDetils = false
       },
       async orgDetails(orgIds) {
-         const res = await $fetch(`${process.env.API_URI}/api/org/${orgIds}`, {
+         const res = await $fetch(`${config.public.apiUrl}/api/org/${orgIds}`, {
             credentials: 'include'
          })
          this.selectedOrg = res.data.OrgUser
       },
       async userOrg() {
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/org/getUserOrg`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/org/getUserOrg`, {
                method: 'get',
                credentials: 'include'
             })

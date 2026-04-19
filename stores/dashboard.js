@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+const config = useRuntimeConfig()
 
 export const useDashboardStore = defineStore('user', {
    state: () => ({
@@ -7,7 +8,7 @@ export const useDashboardStore = defineStore('user', {
       showNotifiDashboard: false
    }),
    getters: {
-      photoUrl: (state) => state.userData.photo ? `${process.env.API_URI}/img/user/${state.userData.photo}` : null
+      photoUrl: (state) => state.userData.photo ? `${config.public.apiUrl}/img/user/${state.userData.photo}` : null
    },
    actions: {
       setPhoto(file) {
@@ -35,7 +36,7 @@ export const useDashboardStore = defineStore('user', {
          formData.append('email', this.userData.email)
          formData.append('photo', this.userData.photo)
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/users/updateMe`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/users/updateMe`, {
                method: 'PATCH',
                credentials: 'include',
                body: formData

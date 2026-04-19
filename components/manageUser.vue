@@ -34,7 +34,7 @@
           >
             <td class="p-3 border font-medium flex items-center gap-3">
               <img
-                :src="`${process.env.API_URI}/img/user/${user.photo}`"
+                :src="`${config.public.apiUrl}/img/user/${user.photo}`"
                 alt="User Photo"
                 class="w-10 h-10 md:w-14 md:h-14 rounded-full"
               />
@@ -171,7 +171,7 @@
             </p>
           </div>
           <img
-            :src="`${process.env.API_URI}/img/user/${userStore.userData.photo}`"
+            :src="`${config.public.apiUrl}/img/user/${userStore.userData.photo}`"
             class="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-lg"
             alt=""
           />
@@ -220,7 +220,7 @@
       >
         <div class="flex items-center gap-3 mb-3">
           <img
-            :src="`${process.env.API_URI}/img/user/${user.photo}`"
+            :src="`${config.public.apiUrl}/img/user/${user.photo}`"
             alt="User Photo"
             class="w-12 h-12 rounded-full"
           />

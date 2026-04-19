@@ -101,7 +101,7 @@
             </p>
             <p class="text-xs text-gray-500 mb-1 flex items-center gap-2">
               <img
-                :src="`${process.env.API_URI}/img/user/${task.assignedTo.photo}`"
+                :src="`${config.public.apiUrl}/img/user/${task.assignedTo.photo}`"
                 class="w-8 h-8 rounded-full"
                 alt=""
               />
@@ -184,7 +184,7 @@
             </p>
             <p class="text-xs text-gray-500 mb-1 flex items-center gap-2">
               <img
-                :src="`${process.env.API_URI}/img/user/${task.assignedTo.photo}`"
+                :src="`${config.public.apiUrl}/img/user/${task.assignedTo.photo}`"
                 class="w-8 h-8 rounded-full"
                 alt=""
               />
@@ -267,7 +267,7 @@
             </p>
             <p class="text-xs text-gray-500 mb-1 flex items-center gap-2">
               <img
-                :src="`${process.env.API_URI}/img/user/${task.assignedTo.photo}`"
+                :src="`${config.public.apiUrl}/img/user/${task.assignedTo.photo}`"
                 class="w-8 h-8 rounded-full"
                 alt=""
               />
@@ -415,7 +415,7 @@
                 class="text-sm font-semibold text-gray-700 flex items-center gap-2"
               >
                 <img
-                  :src="`${process.env.API_URI}/img/user/${com.userId.photo}`"
+                  :src="`${config.public.apiUrl}/img/user/${com.userId.photo}`"
                   alt=""
                   class="w-8 h-8 rounded-full"
                 />
@@ -515,6 +515,7 @@ import { useRoute } from "vue-router";
 import { useTaskStore } from "@/stores/task";
 import { useCommentStore } from "@/stores/comment";
 import { useDashboardStore } from "@/stores/dashboard";
+const config = useRuntimeConfig()
 const route = useRoute();
 const dashboardStore = useDashboardStore();
 const projectId = route.params.projectId;

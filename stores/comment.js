@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+const config = useRuntimeConfig()
 
 export const useCommentStore = defineStore('comment', {
    state: () => ({
@@ -22,7 +23,7 @@ export const useCommentStore = defineStore('comment', {
       async addComment() {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/comment/${this.showComment}`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/comment/${this.showComment}`, {
                method: "POST",
                credentials: "include",
                body: { message: this.newComment },
@@ -43,11 +44,11 @@ export const useCommentStore = defineStore('comment', {
          this.isLoading = true
          try {
             if(!this.showComment) return
-            const res = await $fetch(`${process.env.API_URI}/api/task/${taskId}`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/task/${taskId}`, {
                credentials: "include",
             });
             this.selectedTask = res.data.task
-            const com = await $fetch(`${process.env.API_URI}/api/task/${taskId}/comments`, {
+            const com = await $fetch(`${config.public.apiUrl}/api/task/${taskId}/comments`, {
                credentials: "include",
             });
             this.allComment = (com.data.comments).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt) )
@@ -63,7 +64,7 @@ export const useCommentStore = defineStore('comment', {
       async deleteComment() {
          this.isLoading = true
          try {
-            await $fetch(`${process.env.API_URI}/api/comment/${this.upComId}`, {
+            await $fetch(`${config.public.apiUrl}/api/comment/${this.upComId}`, {
                method: 'DELETE',
                credentials: "include",
             });
@@ -96,7 +97,7 @@ export const useCommentStore = defineStore('comment', {
       async updateComment() {
          this.isLoading = true
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/comment/${this.commentId}`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/comment/${this.commentId}`, {
                method: 'PATCH',
                credentials: "include",
                body: { message: this.updateMessage }

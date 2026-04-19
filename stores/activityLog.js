@@ -1,4 +1,5 @@
 import { defineStore } from "pinia"
+const config = useRuntimeConfig()
 
 export const useActivityLogStore = defineStore('ActivityLog', {
    state: () => ({
@@ -10,7 +11,7 @@ export const useActivityLogStore = defineStore('ActivityLog', {
       async allActivityLog() {
          this.isLoading = true;
          try {
-            const res = await $fetch(`${process.env.API_URI}/api/activitylog`, {
+            const res = await $fetch(`${config.public.apiUrl}/api/activitylog`, {
                credentials: "include",
             });
             this.activityLog = (res.data.getActivity || []).sort(
@@ -26,7 +27,7 @@ export const useActivityLogStore = defineStore('ActivityLog', {
 
       async deleteLog(id) {
          try {
-            await $fetch(`${process.env.API_URI}/api/activitylog/${id}`, {
+            await $fetch(`${config.public.apiUrl}/api/activitylog/${id}`, {
                method: "delete",
                credentials: "include",
             });
